@@ -1,0 +1,9 @@
+# 操作系统 / 编辑器产生的垃圾文件
+Thumbs.db
+Desktop.ini
+.DS_Store
+*.log
+
+# 临时探针文件（排查问题时生成，绝不能带上线）
+_*_tmp.html
+_probe*.html
