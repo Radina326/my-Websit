@@ -3207,6 +3207,18 @@ body.edit-mode [data-editable]:empty::before { content:attr(data-placeholder); c
       if (changed) localStorage.setItem('my_activity_log', JSON.stringify(newLog));
     }
   } catch(e) {}
+
+  // ===== 一次性清理（2026-09-18）=====
+  // 账本里遗留了指向「已不存在文章」的积分记录（project-1、journal-j-xxx），
+  // 结果所有栏目都是空的、贡献墙却有一个格子有颜色。这里清一次本地账本，
+  // 云端那条记录已同步置空。跑过即写标记，之后永不执行；
+  // 确认线上不再需要后，这段可以整块删掉。
+  try {
+    if (!localStorage.getItem('__contribLogReset_20260918')) {
+      localStorage.removeItem('my_activity_log');
+      localStorage.setItem('__contribLogReset_20260918', '1');
+    }
+  } catch(e) {}
 })();
 </script>
 
